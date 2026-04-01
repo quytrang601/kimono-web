@@ -1,0 +1,18 @@
+#final-cta h2 {
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Hiệu ứng zoom nhẹ cho ảnh nền để tạo cảm giác cinematic */
+@keyframes slowZoom {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.1);
+    }
+}
+
+.animate-slow-zoom {
+    animation: slowZoom 20s infinite alternate;
+}

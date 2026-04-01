@@ -1,0 +1,25 @@
+.sakura-petal-v2 {
+    /* clip-path: Vẽ hình cánh hoa bằng tọa độ (hình giọt nước bầu) */
+    clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 50% 85%, 20% 100%, 0% 35%);
+    background-color: #FFC0CB;
+    /* Màu hồng Sakura truyền thống */
+}
+
+/* 2. Hiệu ứng rơi, xoay và chao đảo (Sway) tự nhiên hơn */
+@keyframes sakura-fall-v2 {
+    0% {
+        transform: translateY(-10px) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+        /* Hiện rõ nhanh */
+    }
+
+    100% {
+        /* Rơi xuống, xoay nhiều vòng, và chao sang phải 80px */
+        transform: translateY(110vh) translateX(80px) rotate(720deg);
+        opacity: 0;
+    }
+}

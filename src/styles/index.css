@@ -1,0 +1,8 @@
+/* Nếu bạn không muốn import CSS vào từng file JSX, 
+   bạn có thể import chúng tại đây luôn cũng được: */
+/* Import các file hiệu ứng chung */
+@import './animation.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

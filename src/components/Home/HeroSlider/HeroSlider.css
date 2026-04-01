@@ -1,0 +1,65 @@
+/* src/components/HeroSlider/HeroSlider.css */
+
+/* 1. Hiệu ứng Text bay từ dưới lên (Slide Up Fade In) */
+@keyframes slide-up-fade {
+    0% {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* 2. Hiệu ứng Fade In cơ bản cho Subtitle */
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0.8;
+    }
+}
+
+/* 3. Hiệu ứng Nút đổ màu khi Hover (Button Background Fill) */
+.btn-fill-effect {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    z-index: 1;
+}
+
+.btn-fill-effect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: #7F170E;
+    /* Màu đỏ chủ đạo */
+    transition: width 0.4s ease;
+    z-index: -1;
+}
+
+.btn-fill-effect:hover::after {
+    width: 100%;
+}
+
+.btn-fill-effect:hover {
+    border-color: #7F170E;
+}
+
+/* --- Các Class helper để dùng trong JSX --- */
+.animate-text-primary {
+    animation: slide-up-fade 1.5s ease-out forwards;
+}
+
+.animate-text-secondary {
+    animation: fade-in 1.5s ease-in forwards;
+    animation-delay: 0.3s;
+    /* Hiện sau chữ chính */
+}

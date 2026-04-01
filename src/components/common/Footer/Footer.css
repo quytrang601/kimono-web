@@ -1,0 +1,62 @@
+.footer-container {
+    background-color: #1a1111;
+    /* Nâu đen sâu hơn để tăng độ sang trọng */
+    color: #fff;
+    border-top: 1px solid rgba(127, 23, 14, 0.1);
+    /* Viền đỏ đô cực mảnh trên cùng */
+}
+
+.footer-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    /* Nhẹ nhàng hơn */
+    font-size: 0.75rem;
+    /* Nhỏ lại */
+    letter-spacing: 0.3em;
+    /* Giãn chữ rộng hơn */
+    text-transform: uppercase;
+    margin-bottom: 1.8rem;
+    color: #F8D7D9;
+    opacity: 0.9;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    /* Thu hẹp khoảng cách dòng */
+}
+
+.footer-links a {
+    color: #6b7280;
+    /* text-gray-500 */
+    font-size: 0.8rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    transition: all 0.4s ease;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #F8D7D9;
+    transform: translateX(3px);
+    /* Nhích nhẹ thay vì padding */
+}
+
+.social-link {
+    font-size: 1rem;
+    color: #6b7280;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    color: #7F170E;
+    transform: scale(1.1);
+}
+
+/* Loại bỏ bóng hắt quá to để Footer trông phẳng và tinh tế hơn */
+.footer-container {
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
+}

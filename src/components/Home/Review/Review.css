@@ -1,0 +1,51 @@
+/* src/components/Reviews/Reviews.css */
+
+.marquee-container {
+    display: flex;
+    width: max-content;
+    gap: 1.5rem;
+    padding: 1rem 0;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes scroll-right {
+    0% {
+        transform: translateX(-50%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.animate-scroll-left {
+    animation: scroll-left 50s linear infinite;
+}
+
+.animate-scroll-right {
+    animation: scroll-right 50s linear infinite;
+}
+
+.animate-scroll-left:hover,
+.animate-scroll-right:hover {
+    animation-play-state: paused;
+}
+
+.fade-edge {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+/* 🌊 HOẠ TIẾT SÓNG BIỂN CHÌM (SEIGAIHA) - SVG 🌊 */
+/* Sử dụng màu đỏ đô #7F170E với độ trong suốt cực thấp (0.015) */
+.bg-seigaiha {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40' viewBox='0 0 80 40'%3E%3Cpath d='M0 40a40 40 0 0 1 80 0h-2a38 38 0 0 0-76 0H0zm40 0a40 40 0 0 0 40-40h-2A38 38 0 0 1 42 38v2h-4v-2a38 38 0 0 1-36-38H0a40 40 0 0 0 40 40z' fill='%237F170E' fill-opacity='0.015' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
