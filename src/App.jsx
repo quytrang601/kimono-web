@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import PriceList from './pages/PriceList';
 import Hairstyles from './pages/Hairstyles';
 import Contact from './pages/Contact';
+import Album from './pages/Album';
 
 // Import các thành phần dùng chung cho tất cả các trang
 import TopBar from './components/common/TopBar';
@@ -25,6 +26,7 @@ function App() {
         <Route path="/bang-gia" element={<PriceList />} />
         <Route path="/mau-toc" element={<Hairstyles />} />
         <Route path="/lien-he" element={<Contact />} />
+        <Route path="/album" element={<Album />} />
       </Routes>
 
       <Footer /> {/* Footer luôn hiện ở mọi trang */}
