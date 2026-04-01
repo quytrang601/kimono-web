@@ -10,11 +10,12 @@ const Contact = () => {
     }, []);
 
     return (
-        <main className="bg-[#FCF9F7] min-h-screen pt-32 pb-24 overflow-hidden">
+        <main className="bg-[#FCF9F7] min-h-screen pb-24 overflow-hidden">
             <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
 
-                {/* 1. Header (Gọn gàng hơn) */}
-                <header className="mb-20 opacity-0 animate-fade-in-up">
+                {/* 1. Header: Đưa Hero ra khỏi Container giới hạn chiều ngang (max-w-7xl) 
+               để nó có thể tràn viền nếu muốn, hoặc ít nhất là không bị ép khoảng cách */}
+                <header className="w-full mb-10 opacity-0 animate-fade-in-up">
                     <ContactHero />
                 </header>
 
