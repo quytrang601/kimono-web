@@ -8,6 +8,7 @@ import Hairstyles from "./pages/Hairstyles";
 import Contact from "./pages/Contact";
 import Products from "./pages/Products";
 import Booking from "./pages/Booking";
+import Album from "./pages/Album";
 
 // Import các thành phần dùng chung cho tất cả các trang
 import TopBar from "./components/common/TopBar";
@@ -30,6 +31,7 @@ function App() {
         <Route path="/san-pham" element={<Products />} />
         <Route path="/san-pham/:id" element={<ProductDetail />} />
         <Route path="/dat-lich" element={<Booking />} />
+        <Route path="/album" element={<Album />} />
       </Routes>
       <Footer /> {/* Footer luôn hiện ở mọi trang */}
     </Router>
