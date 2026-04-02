@@ -6,3 +6,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Ép ảnh Twemoji nhỏ lại bằng đúng kích thước của chữ (1em) và căn chỉnh cho đẹp */
+img.twemoji {
+   height: 1.2em;
+   width: 1.2em;
+   margin: 0 .05em 0 .1em;
+   vertical-align: -0.1em;
+   display: inline-block;
+}
