@@ -4,19 +4,19 @@ export const packages = {
       id: 1,
       title: "Furisode cao cấp",
       price: "¥ 30,000 ~ ¥ 45,000",
-      img: "src/assets/luxury-furisode_02.webp",
+      img: "/luxury-furisode_02.webp",
     },
     {
       id: 2,
       title: "Furisode",
       price: "¥ 14,000 ~ ¥ 28,000",
-      img: "src/assets/furisode.jpg",
+      img: "/furisode.jpg",
     },
     {
       id: 3,
       title: "Houmongi",
       price: "¥ 12,000 ~ ¥ 18,000",
-      img: "src/assets/houmongi.webp",
+      img: "/houmongi.webp",
     },
     { id: 4, title: "Kimono ren", price: "¥ 7,000", img: "/img-4.jpg" },
     {

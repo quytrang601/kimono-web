@@ -11,7 +11,7 @@ const About = () => {
                         {/* Ảnh chính lớn - Bo góc hiện đại */}
                         <div className="rounded-[2.5rem] overflow-hidden shadow-2xl">
                             <img
-                                src="src/assets/Aboutus.jpg"
+                                src="/Aboutus.jpg"
                                 alt="Kyo Kimono Rental Experience"
                                 className="w-full h-[600px] object-cover hover:scale-105 transition-transform duration-700"
                             />

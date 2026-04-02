@@ -14,7 +14,7 @@ const PriceList = () => {
             <div className="w-full md:w-[25%] lg:w-[22%] h-[50vh] md:h-[calc(100vh-96px)] sticky top-24 overflow-hidden p-4">
                 <div className="w-full h-full overflow-hidden rounded-2xl shadow-sm border border-gray-200/50">
                     <img
-                        src="src/assets/pricelist.jpg"
+                        src="/pricelist.jpg"
                         alt="Kimono Portrait"
                         className="w-full h-full object-cover object-top animate-slow-zoom"
                     />

@@ -58,10 +58,10 @@ const AlbumSlider = () => {
     }, []);
 
     const images = [
-        "src/assets/ảnh_tóc_dọc_1.jpg", "src/assets/ảnh_tóc_dọc_4.jpg",
-        "src/assets/ảnh_tóc_ngang_3.jpg", "src/assets/ảnh_tóc_dọc_2.jpg",
-        "src/assets/ảnh_tóc_ngang_5.jpg", "src/assets/ảnh_tóc_dọc_3.jpg",
-        "src/assets/ảnh_tóc_dọc_1.jpg", "src/assets/ảnh_tóc_dọc_4.jpg",
+        "/ảnh_tóc_dọc_1.jpg", "/ảnh_tóc_dọc_4.jpg",
+        "/ảnh_tóc_ngang_3.jpg", "/ảnh_tóc_dọc_2.jpg",
+        "/ảnh_tóc_ngang_5.jpg", "/ảnh_tóc_dọc_3.jpg",
+        "/ảnh_tóc_dọc_1.jpg", "/ảnh_tóc_dọc_4.jpg",
     ];
 
     const onFlip = useCallback((e) => {

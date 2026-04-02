@@ -12,10 +12,10 @@ const ContactHero = () => {
   };
 
   const bgImages = [
-    "src/assets/japan.jpg",
-    "src/assets/japan_2.jpg",
-    "src/assets/japan_3.jpg",
-    "src/assets/japan_4.jpg",
+    "/japan.jpg",
+    "/japan_2.jpg",
+    "/japan_3.jpg",
+    "/japan_4.jpg",
   ];
 
   return (
