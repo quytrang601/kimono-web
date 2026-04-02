@@ -1,14 +1,15 @@
 import React from "react";
 
-const BottomFilterTabs = ({ activeTab, onTabClick }) => {
+export default function BottomFilterTabs({ activeTab, onTabClick, isVisible }) {
   return (
-    <div className="fixed bottom-12 left-1/2 -translate-x-1/2 z-[9999] w-fit">
-      {/* Khung ngoài: Glassmorphism với màu đen sâu đặc trưng (Urushi Lacquer style) */}
-      <div className="relative flex items-center bg-[#1a1111]/85 backdrop-blur-2xl p-1.5 rounded-full border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.3)] overflow-hidden">
-
-        {/* Lớp trang trí mờ nhẹ bên trong */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.02] to-transparent pointer-events-none"></div>
-
+    <div
+      className={`fixed bottom-10 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out ${
+        isVisible
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-10 pointer-events-none"
+      }`}
+    >
+      <div className="flex items-center bg-[#1a1111]/90 backdrop-blur-xl p-1.5 rounded-full border border-white/10 shadow-2xl">
         {[
           { id: "women", label: "Kimono Nữ" },
           { id: "men", label: "Kimono Nam" },
@@ -47,6 +48,4 @@ const BottomFilterTabs = ({ activeTab, onTabClick }) => {
       </div>
     </div>
   );
-};
-
-export default BottomFilterTabs;
+}

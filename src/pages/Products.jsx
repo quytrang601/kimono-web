@@ -4,7 +4,7 @@ import Reveal from "../components/common/Reveal";
 import ProductBreadcrumb from "../components/Products/ProductBreadcrumb";
 import ProductHeader from "../components/Products/ProductHeader";
 import ProductSection from "../components/Products/ProductSection";
-import ProductTabs from "../components/Products/ProductTabs";
+import BottomFilterTabs from "../components/Products/BottomFilterTabs"; // Make sure this path is correct!
 import { packages } from "../data/products";
 
 export default function Products() {
@@ -21,7 +21,9 @@ export default function Products() {
     setActiveTab(id);
     const element = document.getElementById(`section-${id}`);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      // Offset by 100px so the section doesn't hide behind the top edge of the browser
+      const y = element.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
 
@@ -37,7 +39,8 @@ export default function Products() {
 
         <ProductTabs activeTab={activeTab} onTabClick={scrollToSection} />
 
-        <div className="space-y-12">
+        {/* Products are now positioned directly under the header */}
+        <div className="space-y-16">
           <ProductSection
             id="section-women"
             title="Kimono Nữ"
@@ -55,6 +58,13 @@ export default function Products() {
           />
         </div>
       </main>
+
+      {/* Floating Filter Tab - Receives the isVisible prop based on 800px scroll */}
+      <BottomFilterTabs
+        activeTab={activeTab}
+        onTabClick={scrollToSection}
+        isVisible={showFloatingTabs}
+      />
     </div>
   );
 }

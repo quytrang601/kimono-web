@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Reveal from "../components/common/Reveal";
-import { packages } from "../data/products"; // Assuming your mock data is still exported from Products.jsx. If you moved it to src/data/products.js, import it from there.
+import { packages } from "../data/products";
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -19,19 +19,19 @@ export default function ProductDetail() {
       foundProduct = packages.women.find((p) => p.id === parseInt(id));
       foundCatName = "Kimono nữ";
       setRelatedProducts(
-        packages.women.filter((p) => p.id !== parseInt(id)).slice(0, 2),
-      ); // Show 2 related items like the screenshot
+        packages.women.filter((p) => p.id !== parseInt(id)).slice(0, 4),
+      );
     } else if (packages.men.find((p) => p.id === parseInt(id))) {
       foundProduct = packages.men.find((p) => p.id === parseInt(id));
       foundCatName = "Kimono nam";
       setRelatedProducts(
-        packages.men.filter((p) => p.id !== parseInt(id)).slice(0, 2),
+        packages.men.filter((p) => p.id !== parseInt(id)).slice(0, 4),
       );
     } else if (packages.kids.find((p) => p.id === parseInt(id))) {
       foundProduct = packages.kids.find((p) => p.id === parseInt(id));
       foundCatName = "Kimono trẻ em";
       setRelatedProducts(
-        packages.kids.filter((p) => p.id !== parseInt(id)).slice(0, 2),
+        packages.kids.filter((p) => p.id !== parseInt(id)).slice(0, 4),
       );
     }
 
@@ -42,70 +42,62 @@ export default function ProductDetail() {
 
   if (!product)
     return (
-      <div className="min-h-screen bg-[#EAE5DF] flex items-center justify-center">
+      <div className="min-h-screen bg-[#FCF9F7] flex items-center justify-center">
         Đang tải...
       </div>
     );
 
   return (
-    // Base background matching the screenshot
-    <div className="min-h-screen bg-[#EAE5DF] font-sans pb-32">
+    <div className="min-h-screen bg-[#FCF9F7] font-sans pb-32">
       <main className="max-w-[1200px] mx-auto px-8 py-12">
-        {/* --- BREADCRUMB --- */}
+        {/* --- NEW BREADCRUMB STYLE --- */}
         <Reveal>
-          <nav className="flex items-center space-x-2 text-[11px] font-medium text-[#6b7280] mb-8">
-            <Link
-              to="/"
-              className="hover:text-[#7F170E] transition-colors flex items-center gap-1"
-            >
-              <svg
-                className="w-3.5 h-3.5 mb-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                />
-              </svg>
+          <nav className="flex items-center space-x-2 text-[10px] uppercase tracking-[0.4em] text-[#8e8e8e] mb-16 relative z-10">
+            <Link to="/" className="hover:text-[#7F170E] transition-colors">
               Trang chủ
             </Link>
-            <span>›</span>
+            <span>/</span>
             <Link
               to="/san-pham"
               className="hover:text-[#7F170E] transition-colors"
             >
               Gói Thuê
             </Link>
-            <span>›</span>
-            <span className="text-[#1a1111]">{product.title}</span>
+            <span>/</span>
+            <span className="text-[#1a1111] font-semibold truncate max-w-[200px] sm:max-w-none">
+              {product.title}
+            </span>
           </nav>
         </Reveal>
 
-        {/* --- MAIN PRODUCT BLOCK --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 mb-32 items-start">
-          {/* Left: Image (Large radius per design.md) */}
-          <Reveal className="relative aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-sm">
+        {/* --- MAIN PRODUCT BLOCK (Asymmetric Grid for Smaller Image) --- */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-20 mb-32 items-start">
+          {/* Left: Image (Now 5/12 columns to make it smaller) */}
+          <Reveal className="md:col-span-5 relative aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-[#7F170E]/5 shadow-xl border border-[#7F170E]/10">
             <img
               src={product.img}
               alt={product.title}
               className="w-full h-full object-cover"
+              onError={(e) => {
+                e.target.src =
+                  "https://via.placeholder.com/600x800?text=Kyo+Kimono";
+              }}
             />
           </Reveal>
 
-          {/* Right: Info */}
-          <Reveal delay={200} className="flex flex-col pt-4 md:pt-10">
+          {/* Right: Info (Now 7/12 columns) */}
+          <Reveal
+            delay={200}
+            className="md:col-span-7 flex flex-col pt-4 md:pt-10"
+          >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#1a1111] leading-[1.1] mb-10 tracking-tight">
               {categoryName} - <br />
-              {product.title}
+              <span className="italic">{product.title}</span>
             </h1>
 
-            {/* Price Box (Rounded pale rectangle from screenshot) */}
-            <div className="bg-[#E4DCD5] rounded-[2rem] px-8 py-6 mb-12 flex items-baseline gap-2 shadow-sm border border-white/20">
-              <span className="text-3xl md:text-4xl font-sans text-[#A46769] font-bold tracking-tight">
+            {/* Price Box */}
+            <div className="bg-[#F9F7F5] rounded-[2rem] px-8 py-6 mb-12 flex items-baseline gap-2 shadow-sm border border-[#7F170E]/10 w-fit">
+              <span className="text-3xl md:text-4xl font-serif text-[#7F170E] font-bold tracking-tight">
                 {product.price}
               </span>
               <span className="text-sm font-medium text-[#4b5563]">
@@ -115,41 +107,56 @@ export default function ProductDetail() {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="flex-1 bg-[#A46769] hover:bg-[#8e585a] text-white py-4 px-8 rounded-lg transition-colors duration-300 font-medium tracking-wide shadow-sm">
+              {/* THIS LINK SENDS THE PRODUCT DATA TO THE BOOKING PAGE */}
+              <Link
+                to="/dat-lich"
+                state={{ prefillProduct: product }}
+                className="flex-1 bg-[#7F170E] hover:bg-[#5C110A] text-white py-4 px-8 rounded-xl transition-colors duration-300 font-medium tracking-wide shadow-lg shadow-[#7F170E]/20 text-center"
+              >
                 Đặt Ngay
-              </button>
-              <button className="flex-1 border border-[#1a1111]/20 bg-transparent hover:bg-white text-[#1a1111] py-4 px-8 rounded-lg transition-all duration-300 font-medium tracking-wide">
+              </Link>
+              <Link
+                to="/bang-gia"
+                className="flex-1 border border-[#7F170E]/20 bg-white hover:bg-[#F9F7F5] text-[#1a1111] py-4 px-8 rounded-xl transition-all duration-300 font-medium tracking-wide text-center"
+              >
                 Bảng Giá Thuê Kimono
-              </button>
+              </Link>
             </div>
           </Reveal>
         </div>
 
         {/* --- RELATED PRODUCTS --- */}
         <Reveal>
-          <h2 className="text-3xl font-serif text-[#1a1111] mb-8">
-            Gói Thuê Kimono
-          </h2>
+          <div className="flex items-center gap-4 mb-8">
+            <div className="h-[1px] w-12 bg-[#7F170E]/30 block"></div>
+            <h2 className="text-3xl font-serif text-[#1a1111]">
+              Gói Thuê Khác
+            </h2>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-24">
-            {relatedProducts.map((item, idx) => (
+            {relatedProducts.map((item) => (
               <Link
                 to={`/san-pham/${item.id}`}
                 key={item.id}
-                className="group block bg-[#F3EFE9] rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-white/50"
+                className="group block bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-[#7F170E]/10 hover:shadow-xl transition-all duration-500 border border-[#7F170E]/10"
               >
                 <div className="aspect-[4/5] overflow-hidden">
                   <img
                     src={item.img}
                     alt={item.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                    onError={(e) => {
+                      e.target.src =
+                        "https://via.placeholder.com/400x500?text=Kyo+Kimono";
+                    }}
                   />
                 </div>
-                <div className="p-5 bg-white/50 backdrop-blur-sm">
-                  <h3 className="font-serif text-lg text-[#1a1111] group-hover:text-[#7F170E] transition-colors mb-1">
+                <div className="p-5">
+                  <h3 className="font-sans font-medium text-sm text-[#1a1111] group-hover:text-[#7F170E] transition-colors mb-1 line-clamp-1">
                     {item.title}
                   </h3>
-                  <p className="text-[#A46769] font-bold text-sm">
+                  <p className="text-[#7F170E] font-bold text-xs">
                     {item.price}
                   </p>
                 </div>
@@ -162,10 +169,10 @@ export default function ProductDetail() {
         <Reveal>
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center text-sm font-medium text-[#1a1111] hover:text-[#7F170E] transition-colors group"
+            className="flex items-center text-xs uppercase tracking-[0.2em] font-medium text-[#4b5563] hover:text-[#7F170E] transition-colors group"
           >
             <svg
-              className="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform"
+              className="w-4 h-4 mr-2 transform group-hover:-translate-x-1 transition-transform"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
