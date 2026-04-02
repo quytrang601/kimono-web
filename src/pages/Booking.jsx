@@ -127,6 +127,8 @@ export default function Booking() {
 
   // --- n8n SUBMISSION ---
   const handleSubmit = async (e) => {
+    // 1. CHANGE TO PRODUCTION URL (remove "-test")
+    const urln8n = "https://moody-llamas-tell.loca.lt/webhook/kimono-booking";
     e.preventDefault();
 
     if (cart.length === 0) {
@@ -134,7 +136,6 @@ export default function Booking() {
       return;
     }
 
-    // Flattening the JSON payload to exactly match your Google Sheet Columns
     const bookingPayload = {
       "Order ID": `KYO-${Date.now()}`,
       "Created At": new Date().toLocaleString("vi-VN"),
@@ -157,19 +158,18 @@ export default function Booking() {
     showToast("Đang gửi thông tin đặt lịch...", "success");
 
     try {
-      const response = await fetch(
-        "http://localhost:5678/webhook-test/kimono-booking",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(bookingPayload),
+      const response = await fetch(urln8n, {
+        method: "POST",
+        // 2. KEEP HEADERS SIMPLE
+        headers: {
+          "Content-Type": "application/json",
+          // REMOVED the ngrok header completely!
         },
-      );
+        body: JSON.stringify(bookingPayload),
+      });
 
       if (response.ok) {
         showToast("Đặt lịch thành công!", "success");
-
-        // Clear all states to give the user a fresh screen
         setCart([]);
         setGuests({ men: 0, women: 0, boys: 0, girls: 0 });
         setAddons({ photo: false, hair: false });
