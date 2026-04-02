@@ -1,67 +1,116 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
-// Component con Reveal (nếu bạn chưa có sẵn thì dùng motion.div đơn giản)
 const Reveal = ({ children, delay = 0.1 }) => (
     <motion.div
-        initial={{ y: 30, opacity: 0 }}
+        initial={{ y: 40, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.8, delay, ease: [0.21, 1, 0.36, 1] }}
+        transition={{ duration: 1, delay, ease: [0.22, 1, 0.36, 1] }}
     >
         {children}
     </motion.div>
 );
 
+
+
 const BookingHero = () => {
+    const { scrollY } = useScroll();
+    const y1 = useTransform(scrollY, [0, 500], [0, -100]);
+    const y2 = useTransform(scrollY, [0, 500], [0, 50]);
+
     return (
-        <section className="relative h-[90vh] flex flex-col items-center justify-center overflow-hidden bg-[#FCF9F7] pt-0">
-            {/* Đảm bảo pt-0 để sát lên trên */}
+        /* SỬA: justify-start -> justify-center (Quay về căn giữa)
+           GIẢM: pt-[12vh] -> pt-[4vh] (Hoặc pt-10, pt-12 tùy độ cao Navbar của bạn)
+           TĂNG NHẸ: h-[98vh] -> min-h-screen (Đảm bảo chiếm trọn màn hình)
+        */
+        <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#FCF9F7] pt-[4vh] border-b border-[#7F170E]/5">
+
+            {/* Texture & Layer trang trí giữ nguyên 100% */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none z-50 bg-[url('https://www.transparenttextures.com/patterns/pinstriped-suit.png')]"></div>
 
             <div className="absolute inset-0 pointer-events-none select-none z-0 flex items-center justify-center">
-                <span className="text-[20vw] font-serif italic text-[#7F170E]/[0.02] whitespace-nowrap tracking-tighter">
-                    Reservation
-                </span>
+                {/* Reservation lớn - Đổi style flex để nó luôn ở giữa */}
+                <motion.div style={{ y: y1 }} className="relative">
+                    <span className="text-[22vw] font-serif italic text-[#7F170E]/[0.015] whitespace-nowrap tracking-tighter uppercase">
+                        Reservation
+                    </span>
+                </motion.div>
+                {/* Kanji */}
+                <motion.div style={{ y: y2 }} className="absolute top-[20%] right-[10%] text-[15vh] font-serif text-[#7F170E]/[0.03] leading-none">縁</motion.div>
             </div>
 
-            <Reveal delay={0.1}>
-                {/* Nếu cụm chữ vẫn thấp, hãy dùng mt-[-5vh] để kéo nó lên trên một chút */}
-                <div className="text-center relative z-10 mt-[-20vh]">
+            {/* --- CỤM NỘI DUNG CHÍNH --- */}
+            {/* Thêm relative z-10 để chắc chắn nằm trên Reservation */}
+            <div className="relative z-10 text-center px-4 flex-shrink-0">
 
-                    {/* Cụm Sub-header: Kyo Experience */}
-                    <div className="flex items-center justify-center gap-4 relative z-10 -mt-12 md:-mt-24 mb-6">
-                        {/* Đường kẻ mảnh hơn, dùng opacity thấp để tạo sự tinh tế */}
-                        <span className="w-6 md:w-10 h-[1px] bg-[#7F170E]/20"></span>
-
-                        <span className="text-[9px] md:text-[10px] uppercase tracking-[0.6em] text-[#7F170E]/70 font-bold italic translate-x-[0.3em]">
+                {/* 1. Kyo Experience: Đưa lên vị trí rất cao bằng mb-2 hoặc mb-0 */}
+                <Reveal delay={0.2}>
+                    <div className="flex items-center justify-center gap-6 mb-2">
+                        <div className="flex flex-col items-end">
+                            <span className="text-[8px] tracking-[0.4em] uppercase mb-1">Traditional</span>
+                            <div className="w-8 h-[1px] bg-[#7F170E]"></div>
+                        </div>
+                        <span className="text-[10px] md:text-[11px] uppercase tracking-[0.7em] text-[#7F170E] font-bold italic">
                             Kyo Experience
                         </span>
-
-                        <span className="w-6 md:w-10 h-[1px] bg-[#7F170E]/20"></span>
+                        <div className="flex flex-col items-start">
+                            <span className="text-[8px] tracking-[0.4em] uppercase mb-1">Modernity</span>
+                            <div className="w-8 h-[1px] bg-[#7F170E]"></div>
+                        </div>
                     </div>
+                </Reveal>
 
-                    {/* Tiêu đề chính: Đặt Lịch Thuê Kimono */}
-                    <h1 className="text-6xl md:text-8xl lg:text-[9rem] font-serif text-[#1a1111] leading-[0.85] tracking-tighter uppercase">
-                        Đặt Lịch <br />
-                        <span className="relative inline-block mt-2">
-                            {/* Chữ "Thuê" mỏng và nghiêng để tạo sự tương phản mạnh */}
-                            <span className="italic font-extralight text-[#7F170E]/90 lowercase">thuê</span>
-                            <span className="ml-4 italic font-light lowercase">Kimono</span>
-
-                            {/* Một nét gạch chân nghệ thuật cực mảnh dưới chữ Kimono */}
-                            <span className="absolute -bottom-2 left-0 w-full h-[1px] bg-gradient-to-r from-[#7F170E]/20 to-transparent"></span>
-                        </span>
+                {/* 2. Tiêu đề chính 11rem (Giữ nguyên) */}
+                <Reveal delay={0.4}>
+                    <h1 className="text-7xl md:text-9xl lg:text-[11rem] font-serif text-[#1a1111] leading-[0.8] tracking-tighter uppercase">
+                        <span className="block">Đặt Lịch</span>
+                        <div className="flex items-center justify-center gap-6 md:gap-10">
+                            <span className="italic font-extralight text-[#7F170E]/90 lowercase pr-2">thuê</span>
+                            <span className="relative">
+                                <span className="italic font-light lowercase">Kimono</span>
+                                <div className="absolute -right-8 -top-4 w-6 h-6 border border-[#7F170E]/30 rounded-sm flex items-center justify-center rotate-12 bg-[#FCF9F7]">
+                                    <span className="text-[6px] text-[#7F170E]/60 font-bold">京</span>
+                                </div>
+                            </span>
+                        </div>
                     </h1>
-                    {/* Cụm Scroll (nhích lên thêm một chút nữa) */}
-                    <div className="mt-10 flex flex-col items-center">
-                        <div className="w-[1px] h-12 bg-gradient-to-b from-[#7F170E]/40 to-transparent mb-4"></div>
-                        <p className="text-[9px] uppercase tracking-[0.5em] text-gray-400 font-light">
-                            Scroll to explore
+                </Reveal>
+
+                {/* 3. Text mô tả nén mt-3 */}
+                <Reveal delay={0.6}>
+                    <div className="mt-3 max-w-[400px] mx-auto">
+                        <p className="text-[10px] md:text-[11px] text-gray-500 tracking-[0.3em] leading-relaxed uppercase">
+                            Khám phá vẻ đẹp di sản qua từng <br />
+                            <span className="text-[#7F170E]/60 font-medium">nếp gấp thời gian</span>
                         </p>
                     </div>
-                </div>
-            </Reveal>
+                </Reveal>
+
+                {/* 4. Discover More: Giảm mt xuống mt-6 */}
+                <Reveal delay={0.8}>
+                    <div className="mt-6 flex flex-col items-center group cursor-pointer relative">
+                        <div className="absolute w-10 h-10 border border-[#7F170E]/5 rounded-full -mt-2 animate-[ping_3s_ease-in-out_infinite]"></div>
+                        <div className="relative w-[1px] h-8 bg-gradient-to-b from-[#7F170E]/40 via-[#7F170E]/10 to-transparent overflow-hidden">
+                            <motion.div animate={{ y: [0, 32] }} transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }} className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-transparent via-[#7F170E] to-transparent" />
+                        </div>
+                        <p className="mt-3 text-[9px] uppercase tracking-[0.5em] text-gray-400 font-light group-hover:text-[#7F170E] transition-colors duration-500">
+                            Discover more
+                        </p>
+                    </div>
+                </Reveal>
+            </div>
+
+            {/* --- SPACER ĐỂ ĐẨY NỘI DUNG LÊN CAO (Mới) --- */}
+            {/* Thêm div này để chiếm khoảng trống phía dưới, "ép" cụm chữ lên trên */}
+            <div className="flex-grow min-h-[10vh] lg:min-h-[15vh]"></div>
+
+            {/* Chi tiết trang trí góc */}
+            <div className="absolute bottom-10 right-10 hidden md:block z-0 opacity-10">
+                {/* ... */}
+            </div>
         </section>
     );
 };
+
 export default BookingHero;
