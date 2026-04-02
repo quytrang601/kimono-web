@@ -1,6 +1,6 @@
 import React from "react";
 import "./CTA.css";
-
+import { MapPin, CalendarDays, Shirt, Scissors, Camera, Flower2 } from 'lucide-react';
 const FinalCTA = () => {
   return (
     <section
@@ -20,7 +20,11 @@ const FinalCTA = () => {
       <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
         {/* Họa tiết hoa đào nhỏ rơi */}
         <div className="flex justify-center mb-8">
-          <span className="text-3xl animate-bounce">🌸</span>
+          <img
+            src="public/cherry-blossom_1f338_iOS_18.4.png"
+            alt="Hoa đào"
+            className="w-10 h-10 animate-bounce object-contain"
+          />
         </div>
 
         <h4 className="text-[#7F170E] font-medium tracking-[0.5em] uppercase text-xs mb-6">

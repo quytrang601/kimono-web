@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Twemoji from 'react-twemoji';
 // Import các trang
 import Home from "./pages/Home";
 import PriceList from "./pages/PriceList";
@@ -19,7 +18,8 @@ import ProductDetail from "./pages/ProductDetail";
 
 function App() {
   return (
-    <Twemoji options={{ className: 'twemoji' }}>
+    <>
+      {/* <Twemoji options={{ className: 'twemoji' }}> */}
       <Router>
         <Sakura />
         <TopBar />
@@ -36,7 +36,8 @@ function App() {
         </Routes>
         <Footer /> {/* Footer luôn hiện ở mọi trang */}
       </Router>
-    </Twemoji>
+      {/* </Twemoji > */}
+    </>
   );
 }
 

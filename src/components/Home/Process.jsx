@@ -4,25 +4,25 @@ const Process = () => {
     const steps = [
         {
             id: 1,
-            icon: "📅",
+            icon: "public/calendar.png",
             title: "Đặt Lịch",
             desc: "Đặt lịch qua website, Zalo hoặc điện thoại. Chọn gói thuê và ngày phù hợp với bạn.",
         },
         {
             id: 2,
-            icon: "👘",
+            icon: "public/kimono.png",
             title: "Chọn Kimono",
             desc: "Đến cửa hàng và chọn bộ Kimono yêu thích từ bộ sưu tập hơn 200 mẫu đa dạng.",
         },
         {
             id: 3,
-            icon: "✂️",
+            icon: "public/makeup.png",
             title: "Mặc & Làm Tóc",
             desc: "Đội ngũ chuyên nghiệp hỗ trợ mặc Kimono đúng cách và làm tóc kiểu Nhật chỉ trong 30 phút.",
         },
         {
             id: 4,
-            icon: "📸",
+            icon: "public/photographer.png",
             title: "Tận Hưởng & Chụp Ảnh",
             desc: "Dạo phố Kyoto, chụp ảnh tại các điểm tham quan, lưu giữ những khoảnh khắc đáng nhớ.",
         },
@@ -70,7 +70,7 @@ const Process = () => {
                                     */}
                                     <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center text-3xl shadow-sm border border-gray-100 transition-all duration-500 group-hover:border-[#7F170E] group-hover:shadow-[0_15px_60px_-15px_rgba(127,23,14,0.1)] overflow-hidden">
                                         <span className="opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 transform">
-                                            {step.icon}
+                                            <img src={step.icon} alt={step.title} className="w-10 h-10" />
                                         </span>
                                     </div>
 
