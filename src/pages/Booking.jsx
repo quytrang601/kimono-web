@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useLocation } from "react-router-dom"; // Needed to catch data from ProductDetail
 import Reveal from "../components/common/Reveal";
 import Toast from "../components/common/Toast";
 import BookingBreadcrumb from "../components/Booking/BookingBreadcrumb";
@@ -10,6 +11,8 @@ import BookingHero from "../components/Booking/BookingHero";
 import { packages } from "../data/products";
 
 export default function Booking() {
+  const location = useLocation();
+
   // --- STATE ---
   const [cart, setCart] = useState([]);
   const [guests, setGuests] = useState({ men: 0, women: 0, boys: 0, girls: 0 });
@@ -29,10 +32,27 @@ export default function Booking() {
   });
   const toastTimeout = useRef(null);
 
-  // Scroll to top on mount
+  // --- PRE-FILL CART FROM PRODUCT DETAIL PAGE ---
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    window.scrollTo(0, 0); // Scroll to top when page loads
+
+    // If the user clicked "Đặt Ngay" on a product page, add that product to the cart
+    if (location.state && location.state.prefillProduct) {
+      const item = location.state.prefillProduct;
+
+      setCart((prevCart) => {
+        // Prevent adding it twice (useful in React Strict Mode)
+        const alreadyInCart = prevCart.find((c) => c.id === item.id);
+        if (alreadyInCart) return prevCart;
+
+        return [...prevCart, { ...item, qty: 1 }];
+      });
+
+      // Show toast and clear history so it doesn't re-add if user refreshes the page
+      showToast(`Đã thêm ${item.title}`, "success");
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
 
   // --- HANDLERS ---
   const showToast = (message, type = "success") => {
@@ -40,7 +60,7 @@ export default function Booking() {
     setToast({ visible: true, message, type });
     toastTimeout.current = setTimeout(() => {
       setToast((prev) => ({ ...prev, visible: false }));
-    }, 500);
+    }, 1500); // 1.5 seconds so users can read it comfortably
   };
 
   const handleAddToCart = (item) => {
@@ -84,7 +104,7 @@ export default function Booking() {
   const toggleAddon = (type) =>
     setAddons((prev) => ({ ...prev, [type]: !prev[type] }));
 
-  // Dynamic price calculation
+  // Dynamic price calculation handling "¥ 30,000 ~ ¥ 45,000" formats
   const calculateTotal = () => {
     let totalMin = 0;
     let totalMax = 0;
@@ -105,56 +125,68 @@ export default function Booking() {
     return `¥ ${totalMin.toLocaleString()} ~ ¥ ${totalMax.toLocaleString()}`;
   };
 
-  // --- n8n SUBMISSION FORMAT ---
+  // --- n8n SUBMISSION ---
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Creating a clean JSON payload for your Webhook -> Google Sheets
+    if (cart.length === 0) {
+      showToast("Vui lòng chọn ít nhất 1 dịch vụ!", "error");
+      return;
+    }
+
+    // Flattening the JSON payload to exactly match your Google Sheet Columns
     const bookingPayload = {
-      order_id: `KYO-${Date.now()}`,
-      created_at: new Date().toLocaleString("vi-VN"),
-      customer: {
-        full_name: formData.name,
-        phone_number: formData.phone,
-        email_address: formData.email,
-        appointment_date: formData.date,
-        appointment_time: formData.time,
-      },
-      party_details: {
-        adult_men: guests.men,
-        adult_women: guests.women,
-        kids_boys: guests.boys,
-        kids_girls: guests.girls,
-        total_people: guests.men + guests.women + guests.boys + guests.girls,
-      },
-      extra_services: {
-        photography: addons.photo ? "Yes" : "No",
-        hairstyling: addons.hair ? "Yes" : "No",
-      },
-      estimated_total: calculateTotal(),
-      // Send cart items as a stringified list so it fits in one Google Sheet cell easily
-      items_summary: cart
+      "Order ID": `KYO-${Date.now()}`,
+      "Created At": new Date().toLocaleString("vi-VN"),
+      Name: formData.name,
+      Phone: formData.phone,
+      Email: formData.email,
+      Date: formData.date,
+      Time: formData.time,
+      "Total People": guests.men + guests.women + guests.boys + guests.girls,
+      "Details (Men/Women/Boys/Girls)": `${guests.men}/${guests.women}/${guests.boys}/${guests.girls}`,
+      Photography: addons.photo ? "Yes" : "No",
+      Hairstyling: addons.hair ? "Yes" : "No",
+      "Items Summary": cart
         .map((item) => `${item.qty}x ${item.title} (${item.price})`)
         .join("\n"),
+      "Estimated Total": calculateTotal(),
     };
 
     console.log("SENDING TO n8n:", bookingPayload);
     showToast("Đang gửi thông tin đặt lịch...", "success");
 
-    /* ADD YOUR N8N WEBHOOK LOGIC HERE:
     try {
-      await fetch("YOUR_WEBHOOK_URL", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(bookingPayload)
-      });
-      alert("Đặt lịch thành công!");
-      // Optionally clear cart and form here
+      const response = await fetch(
+        "http://localhost:5678/webhook-test/kimono-booking",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(bookingPayload),
+        },
+      );
+
+      if (response.ok) {
+        showToast("Đặt lịch thành công!", "success");
+
+        // Clear all states to give the user a fresh screen
+        setCart([]);
+        setGuests({ men: 0, women: 0, boys: 0, girls: 0 });
+        setAddons({ photo: false, hair: false });
+        setFormData({
+          name: "",
+          phone: "",
+          email: "",
+          date: "",
+          time: "09:00",
+        });
+      } else {
+        showToast("Có lỗi xảy ra từ máy chủ.", "error");
+      }
     } catch (error) {
       console.error(error);
-      alert("Lỗi kết nối mạng, vui lòng thử lại.");
+      showToast("Lỗi kết nối mạng, vui lòng kiểm tra lại.", "error");
     }
-    */
   };
 
   return (
