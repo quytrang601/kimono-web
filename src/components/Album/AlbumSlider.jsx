@@ -65,8 +65,11 @@ const AlbumSlider = () => {
     ];
 
     const onFlip = useCallback((e) => {
-        const currentIndex = e.data;
-        setPageDisplay(`${currentIndex + 1} - ${Math.min(currentIndex + 2, images.length)}`);
+        const currentIndex = e.data; // Đây là index của trang bên trái (0, 2, 4...)
+        setPageDisplay({
+            start: currentIndex + 1,
+            end: Math.min(currentIndex + 2, images.length)
+        });
     }, [images.length]);
 
     return (
@@ -117,18 +120,44 @@ const AlbumSlider = () => {
                 {/* BỘ ĐẾM */}
                 <div className="mt-10 flex flex-col items-center w-full max-w-[400px]">
                     <div className="flex items-center justify-between w-full px-4 text-gray-500">
-                        <button onClick={() => bookRef.current.pageFlip().flipPrev()} className="p-2 opacity-30 hover:opacity-100 transition-all hover:-translate-x-1"><PiArrowLeftLight className="text-2xl" /></button>
+                        <button
+                            onClick={() => bookRef.current.pageFlip().flipPrev()}
+                            className="p-2 opacity-30 hover:opacity-100 transition-all hover:-translate-x-1"
+                        >
+                            <PiArrowLeftLight className="text-2xl" />
+                        </button>
+
                         <div className="flex flex-col items-center">
-                            <span className="text-[9px] uppercase tracking-[0.6em] text-[#7F170E]/50 font-bold mb-1">Collection</span>
+                            <span className="text-[9px] uppercase tracking-[0.6em] text-[#7F170E]/50 font-bold mb-1">
+                                Collection
+                            </span>
                             <div className="text-[13px] font-serif italic tracking-widest flex items-center">
-                                <span className="text-[#7F170E]">{pageDisplay.split(' ')[0]}</span>
+                                {/* Hiển thị 1-2, 3-4,... */}
+                                <span className="text-[#7F170E]">
+                                    {pageDisplay.start} - {pageDisplay.end}
+                                </span>
                                 <span className="mx-3 opacity-20">/</span>
                                 <span className="text-gray-400">{images.length}</span>
                             </div>
                         </div>
-                        <button onClick={() => bookRef.current.pageFlip().flipNext()} className="p-2 opacity-30 hover:opacity-100 transition-all hover:translate-x-1"><PiArrowRightLight className="text-2xl" /></button>
+
+                        <button
+                            onClick={() => bookRef.current.pageFlip().flipNext()}
+                            className="p-2 opacity-30 hover:opacity-100 transition-all hover:translate-x-1"
+                        >
+                            <PiArrowRightLight className="text-2xl" />
+                        </button>
                     </div>
-                    <div className="mt-6 w-32 h-[1px] bg-gray-200/40 relative"><div className="absolute top-0 left-0 h-full bg-[#7F170E]/20 transition-all duration-1000" style={{ width: `${(parseInt(pageDisplay.split('-')[1]) / images.length) * 100}%` }}></div></div>
+
+                    {/* THANH PROGRESS ĐÃ SỬA LOGIC WIDTH */}
+                    <div className="mt-6 w-32 h-[1px] bg-gray-200/40 relative overflow-hidden">
+                        <div
+                            className="absolute top-0 left-0 h-full bg-[#7F170E]/40 transition-all duration-500 ease-out"
+                            style={{
+                                width: `${(pageDisplay.end / images.length) * 100}%`
+                            }}
+                        ></div>
+                    </div>
                 </div>
             </motion.div>
         </section>

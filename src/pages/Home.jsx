@@ -14,8 +14,10 @@ import About from '../components/Home/Aboutstore'
 import Process from '../components/Home/Process';
 import Review from '../components/Home/Review/Review';
 import CTA from '../components/Home/CallToAction/CTA'
+
 export default function App() {
     useEffect(() => {
+        window.scrollTo(0, 0);
         // Khởi tạo AOS bên trong useEffect để đảm bảo chỉ chạy ở phía Client
         try {
             AOS.init({
