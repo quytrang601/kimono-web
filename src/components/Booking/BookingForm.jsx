@@ -189,7 +189,7 @@ export default function BookingForm({
                 onClick={() => onAddonToggle("hair")}
                 className={`flex-1 min-w-[140px] flex items-center justify-center gap-3 px-6 py-4 text-xs font-bold rounded-2xl border transition-all duration-500 ${addons.hair ? "bg-[#7F170E] text-white border-[#7F170E] shadow-lg shadow-[#7F170E]/20" : "bg-white border-gray-100 text-gray-500 hover:border-[#7F170E]/30 hover:text-[#7F170E]"}`}
               >
-                <img src="public/stars.png" alt="hair" className="w-8 h-8 inline-block align-middle object-contain" /> Làm tóc chuyên nghiệp
+                <img src="/stars.png" alt="hair" className="w-8 h-8 inline-block align-middle object-contain" /> Làm tóc chuyên nghiệp
               </button>
             </div>
           </div>

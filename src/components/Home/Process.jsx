@@ -4,25 +4,25 @@ const Process = () => {
     const steps = [
         {
             id: 1,
-            icon: "public/calendar.png",
+            icon: "/calendar.png",
             title: "Đặt Lịch",
             desc: "Đặt lịch qua website, Zalo hoặc điện thoại. Chọn gói thuê và ngày phù hợp với bạn.",
         },
         {
             id: 2,
-            icon: "public/kimono.png",
+            icon: "/kimono.png",
             title: "Chọn Kimono",
             desc: "Đến cửa hàng và chọn bộ Kimono yêu thích từ bộ sưu tập hơn 200 mẫu đa dạng.",
         },
         {
             id: 3,
-            icon: "public/makeup.png",
+            icon: "/makeup.png",
             title: "Mặc & Làm Tóc",
             desc: "Đội ngũ chuyên nghiệp hỗ trợ mặc Kimono đúng cách và làm tóc kiểu Nhật chỉ trong 30 phút.",
         },
         {
             id: 4,
-            icon: "public/photographer.png",
+            icon: "/photographer.png",
             title: "Tận Hưởng & Chụp Ảnh",
             desc: "Dạo phố Kyoto, chụp ảnh tại các điểm tham quan, lưu giữ những khoảnh khắc đáng nhớ.",
         },

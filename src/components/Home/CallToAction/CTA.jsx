@@ -21,7 +21,7 @@ const FinalCTA = () => {
         {/* Họa tiết hoa đào nhỏ rơi */}
         <div className="flex justify-center mb-8">
           <img
-            src="public/cherry-blossom_1f338_iOS_18.4.png"
+            src="/cherry-blossom_1f338_iOS_18.4.png"
             alt="Hoa đào"
             className="w-10 h-10 animate-bounce object-contain"
           />
