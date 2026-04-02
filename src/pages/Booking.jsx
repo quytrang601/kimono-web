@@ -6,7 +6,7 @@ import BookingBreadcrumb from "../components/Booking/BookingBreadcrumb";
 import ServiceSelection from "../components/Booking/ServiceSelection";
 import CartSummary from "../components/Booking/CartSummary";
 import BookingForm from "../components/Booking/BookingForm";
-
+import BookingHero from "../components/Booking/BookingHero";
 // Import your existing data
 import { packages } from "../data/products";
 
@@ -190,7 +190,7 @@ export default function Booking() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FCF9F7] font-sans pb-32 relative">
+    <div className="min-h-screen bg-[#FCF9F7] font-sans relative">
       <Toast
         visible={toast.visible}
         message={toast.message}
@@ -198,18 +198,10 @@ export default function Booking() {
       />
 
       <main className="max-w-[1300px] mx-auto px-6 py-10">
-        <Reveal>
+        {/* <Reveal>
           <BookingBreadcrumb />
-        </Reveal>
-
-        <Reveal delay={0.1}>
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-serif text-[#1a1111] mb-6">
-              Đặt Lịch Thuê Kimono
-            </h1>
-            <div className="w-12 h-[1px] bg-[#7F170E]/30 mx-auto"></div>
-          </div>
-        </Reveal>
+        </Reveal> */}
+        <BookingHero />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           <div className="lg:col-span-7">
