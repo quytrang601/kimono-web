@@ -125,8 +125,10 @@ export default function Booking() {
     return `¥ ${totalMin.toLocaleString()} ~ ¥ ${totalMax.toLocaleString()}`;
   };
 
-  // --- n8n SUBMISSION ---
+  // --- DIRECT GOOGLE SHEETS SUBMISSION ---
   const handleSubmit = async (e) => {
+    const googleScriptUrl =
+      "https://script.google.com/macros/s/AKfycbzC94KYqAyEdDm__KHD7OAt50FXXLrM9tmXJEHYpgxY_IwkGriC6HhzpY6YShHGBeDu/exec";
     e.preventDefault();
 
     if (cart.length === 0) {
@@ -134,42 +136,52 @@ export default function Booking() {
       return;
     }
 
-    // Flattening the JSON payload to exactly match your Google Sheet Columns
-    const bookingPayload = {
-      "Order ID": `KYO-${Date.now()}`,
-      "Created At": new Date().toLocaleString("vi-VN"),
-      Name: formData.name,
-      Phone: formData.phone,
-      Email: formData.email,
-      Date: formData.date,
-      Time: formData.time,
-      "Total People": guests.men + guests.women + guests.boys + guests.girls,
-      "Details (Men/Women/Boys/Girls)": `${guests.men}/${guests.women}/${guests.boys}/${guests.girls}`,
-      Photography: addons.photo ? "Yes" : "No",
-      Hairstyling: addons.hair ? "Yes" : "No",
-      "Items Summary": cart
-        .map((item) => `${item.qty}x ${item.title} (${item.price})`)
-        .join("\n"),
-      "Estimated Total": calculateTotal(),
+    // 1. Gather all the data into variables
+    const orderId = `KYO-${Date.now()}`;
+    const createdAt = new Date().toLocaleString("vi-VN");
+    const totalPeople = guests.men + guests.women + guests.boys + guests.girls;
+    const details = `${guests.men}/${guests.women}/${guests.boys}/${guests.girls}`;
+    const photo = addons.photo ? "Yes" : "No";
+    const hair = addons.hair ? "Yes" : "No";
+    const items = cart
+      .map((item) => `${item.qty}x ${item.title} (${item.price})`)
+      .join("\n");
+    const total = calculateTotal();
+
+    // 2. Format exactly how Google Apps Script expects it: { values: [col1, col2...] }
+    const payloadForGoogle = {
+      values: [
+        orderId,
+        createdAt,
+        formData.name,
+        formData.phone,
+        formData.email,
+        formData.date,
+        formData.time,
+        totalPeople,
+        details,
+        photo,
+        hair,
+        items,
+        total,
+      ],
     };
 
-    console.log("SENDING TO n8n:", bookingPayload);
+    console.log("SENDING TO GOOGLE SHEETS:", payloadForGoogle);
     showToast("Đang gửi thông tin đặt lịch...", "success");
 
     try {
-      const response = await fetch(
-        "http://localhost:5678/webhook-test/kimono-booking",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(bookingPayload),
+      const response = await fetch(googleScriptUrl, {
+        method: "POST",
+        // 3. THE CORS MAGIC TRICK: Use text/plain to skip preflight!
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
         },
-      );
+        body: JSON.stringify(payloadForGoogle),
+      });
 
       if (response.ok) {
         showToast("Đặt lịch thành công!", "success");
-
-        // Clear all states to give the user a fresh screen
         setCart([]);
         setGuests({ men: 0, women: 0, boys: 0, girls: 0 });
         setAddons({ photo: false, hair: false });

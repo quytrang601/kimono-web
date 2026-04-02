@@ -6,19 +6,19 @@ import './HeroSlider.css';
 const slides = [
     {
         id: 1,
-        image: 'src/assets/Slider_image_1.jpg',
+        image: '/Slider_image_1.jpg',
         title: 'Hóa Thân Tại Cố Đô Kyoto',
         subtitle: 'Trải nghiệm vẻ đẹp truyền thống Nhật Bản trong từng nếp áo Kimono'
     },
     {
         id: 2,
-        image: 'src/assets/Slider_image_2.jpg',
+        image: '/Slider_image_2.jpg',
         title: 'Khoảnh Khắc Đẹp Tựạ Tranh',
         subtitle: 'Lưu giữ những kỷ niệm tuyệt vời nhất tại xứ sở Hoa Đào'
     },
     {
         id: 3,
-        image: 'src/assets/Slider_image_3.avif',
+        image: '/Slider_image_3.avif',
         title: <>Dịch Vụ <br /> Kimono Cao Cấp</>,
         subtitle: 'Hơn 500+ mẫu Kimono & Yukata độc đáo, phụ kiện tinh tế'
     },

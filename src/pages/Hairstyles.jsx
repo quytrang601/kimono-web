@@ -8,27 +8,27 @@ const Hairstyle = () => {
     const hairstyles = [
         {
             id: 1,
-            img: "src/assets/ảnh_tóc_dọc_4.jpg",
+            img: "/ảnh_tóc_dọc_4.jpg",
             size: "md:col-span-2 md:row-span-2"
         },
         {
             id: 2,
-            img: "src/assets/ảnh_tóc_ngang_3.jpg",
+            img: "/ảnh_tóc_ngang_3.jpg",
             size: "md:col-span-1 md:row-span-1"
         },
         {
             id: 3,
-            img: "src/assets/ảnh_tóc_dọc_1.jpg",
+            img: "/ảnh_tóc_dọc_1.jpg",
             size: "md:col-span-1 md:row-span-2"
         },
         {
             id: 4,
-            img: "src/assets/ảnh_tóc_ngang_5.jpg",
+            img: "/ảnh_tóc_ngang_5.jpg",
             size: "md:col-span-1 md:row-span-1"
         },
         {
             id: 5,
-            img: "src/assets/ảnh_tóc_ngang_6.jpg",
+            img: "/ảnh_tóc_ngang_6.jpg",
             size: "md:col-span-1 md:row-span-1"
         }
     ];

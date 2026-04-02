@@ -56,7 +56,7 @@ const ContactInfo = () => {
             <div className="lg:col-span-5 order-1 lg:order-2 sticky top-32">
                 <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl shadow-gray-200/50 group">
                     <img
-                        src="src/assets/kimonostore.jpg"
+                        src="/kimonostore.jpg"
                         alt="Kyo Kimono Aesthetic"
                         className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-[3s] group-hover:scale-105"
                     />
