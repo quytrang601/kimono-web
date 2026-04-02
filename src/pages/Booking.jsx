@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useLocation } from "react-router-dom"; // Needed to catch data from ProductDetail
 import Reveal from "../components/common/Reveal";
 import Toast from "../components/common/Toast";
 import BookingBreadcrumb from "../components/Booking/BookingBreadcrumb";
@@ -10,6 +11,8 @@ import BookingForm from "../components/Booking/BookingForm";
 import { packages } from "../data/products";
 
 export default function Booking() {
+  const location = useLocation();
+
   // --- STATE ---
   const [cart, setCart] = useState([]);
   const [guests, setGuests] = useState({ men: 0, women: 0, boys: 0, girls: 0 });
@@ -29,10 +32,27 @@ export default function Booking() {
   });
   const toastTimeout = useRef(null);
 
-  // Scroll to top on mount
+  // --- PRE-FILL CART FROM PRODUCT DETAIL PAGE ---
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    window.scrollTo(0, 0); // Scroll to top when page loads
+
+    // If the user clicked "Đặt Ngay" on a product page, add that product to the cart
+    if (location.state && location.state.prefillProduct) {
+      const item = location.state.prefillProduct;
+
+      setCart((prevCart) => {
+        // Prevent adding it twice (useful in React Strict Mode)
+        const alreadyInCart = prevCart.find((c) => c.id === item.id);
+        if (alreadyInCart) return prevCart;
+
+        return [...prevCart, { ...item, qty: 1 }];
+      });
+
+      // Show toast and clear history so it doesn't re-add if user refreshes the page
+      showToast(`Đã thêm ${item.title}`, "success");
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
 
   // --- HANDLERS ---
   const showToast = (message, type = "success") => {
@@ -40,7 +60,7 @@ export default function Booking() {
     setToast({ visible: true, message, type });
     toastTimeout.current = setTimeout(() => {
       setToast((prev) => ({ ...prev, visible: false }));
-    }, 1000); // Increased slightly to 1s so they have time to read "Đặt lịch thành công"
+    }, 1500); // 1.5 seconds so users can read it comfortably
   };
 
   const handleAddToCart = (item) => {
@@ -84,7 +104,7 @@ export default function Booking() {
   const toggleAddon = (type) =>
     setAddons((prev) => ({ ...prev, [type]: !prev[type] }));
 
-  // Dynamic price calculation
+  // Dynamic price calculation handling "¥ 30,000 ~ ¥ 45,000" formats
   const calculateTotal = () => {
     let totalMin = 0;
     let totalMax = 0;
@@ -105,7 +125,7 @@ export default function Booking() {
     return `¥ ${totalMin.toLocaleString()} ~ ¥ ${totalMax.toLocaleString()}`;
   };
 
-  // --- n8n SUBMISSION FORMAT ---
+  // --- n8n SUBMISSION ---
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -161,11 +181,11 @@ export default function Booking() {
           time: "09:00",
         });
       } else {
-        showToast("Có lỗi xảy ra từ máy chủ n8n.", "error");
+        showToast("Có lỗi xảy ra từ máy chủ.", "error");
       }
     } catch (error) {
       console.error(error);
-      showToast("Lỗi kết nối mạng, vui lòng kiểm tra lại n8n.", "error");
+      showToast("Lỗi kết nối mạng, vui lòng kiểm tra lại.", "error");
     }
   };
 

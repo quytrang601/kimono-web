@@ -20,7 +20,7 @@ export default function ProductDetail() {
       foundCatName = "Kimono nữ";
       setRelatedProducts(
         packages.women.filter((p) => p.id !== parseInt(id)).slice(0, 4),
-      ); // Showing up to 4 related items
+      );
     } else if (packages.men.find((p) => p.id === parseInt(id))) {
       foundProduct = packages.men.find((p) => p.id === parseInt(id));
       foundCatName = "Kimono nam";
@@ -70,15 +70,14 @@ export default function ProductDetail() {
           </nav>
         </Reveal>
 
-        {/* --- MAIN PRODUCT BLOCK --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 mb-32 items-start">
-          {/* Left: Image */}
-          <Reveal className="relative aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-[#7F170E]/5 shadow-xl border border-[#7F170E]/10">
+        {/* --- MAIN PRODUCT BLOCK (Asymmetric Grid for Smaller Image) --- */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-20 mb-32 items-start">
+          {/* Left: Image (Now 5/12 columns to make it smaller) */}
+          <Reveal className="md:col-span-5 relative aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-[#7F170E]/5 shadow-xl border border-[#7F170E]/10">
             <img
               src={product.img}
               alt={product.title}
               className="w-full h-full object-cover"
-              // Fallback if image path is broken
               onError={(e) => {
                 e.target.src =
                   "https://via.placeholder.com/600x800?text=Kyo+Kimono";
@@ -86,15 +85,18 @@ export default function ProductDetail() {
             />
           </Reveal>
 
-          {/* Right: Info */}
-          <Reveal delay={200} className="flex flex-col pt-4 md:pt-10">
+          {/* Right: Info (Now 7/12 columns) */}
+          <Reveal
+            delay={200}
+            className="md:col-span-7 flex flex-col pt-4 md:pt-10"
+          >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#1a1111] leading-[1.1] mb-10 tracking-tight">
               {categoryName} - <br />
               <span className="italic">{product.title}</span>
             </h1>
 
             {/* Price Box */}
-            <div className="bg-[#F9F7F5] rounded-[2rem] px-8 py-6 mb-12 flex items-baseline gap-2 shadow-sm border border-[#7F170E]/10">
+            <div className="bg-[#F9F7F5] rounded-[2rem] px-8 py-6 mb-12 flex items-baseline gap-2 shadow-sm border border-[#7F170E]/10 w-fit">
               <span className="text-3xl md:text-4xl font-serif text-[#7F170E] font-bold tracking-tight">
                 {product.price}
               </span>
@@ -103,10 +105,12 @@ export default function ProductDetail() {
               </span>
             </div>
 
-            {/* Action Buttons (Linked to actual pages) */}
+            {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
+              {/* THIS LINK SENDS THE PRODUCT DATA TO THE BOOKING PAGE */}
               <Link
                 to="/dat-lich"
+                state={{ prefillProduct: product }}
                 className="flex-1 bg-[#7F170E] hover:bg-[#5C110A] text-white py-4 px-8 rounded-xl transition-colors duration-300 font-medium tracking-wide shadow-lg shadow-[#7F170E]/20 text-center"
               >
                 Đặt Ngay

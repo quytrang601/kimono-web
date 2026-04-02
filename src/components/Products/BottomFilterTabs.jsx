@@ -1,7 +1,14 @@
-const BottomFilterTabs = ({ activeTab, onTabClick }) => {
-  // No Reveal wrapper here for instant availability
+import React from "react";
+
+export default function BottomFilterTabs({ activeTab, onTabClick, isVisible }) {
   return (
-    <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50">
+    <div
+      className={`fixed bottom-10 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out ${
+        isVisible
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-10 pointer-events-none"
+      }`}
+    >
       <div className="flex items-center bg-[#1a1111]/90 backdrop-blur-xl p-1.5 rounded-full border border-white/10 shadow-2xl">
         {[
           { id: "women", label: "Nữ" },
@@ -24,6 +31,4 @@ const BottomFilterTabs = ({ activeTab, onTabClick }) => {
       </div>
     </div>
   );
-};
-
-export default BottomFilterTabs;
+}
