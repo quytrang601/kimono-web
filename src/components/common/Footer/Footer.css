@@ -25,7 +25,7 @@
     flex-direction: column;
     gap: 0.8rem;
     /* Thu hẹp khoảng cách dòng */
-}
+} ,
 
 .footer-links a {
     color: #6b7280;
