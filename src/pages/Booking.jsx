@@ -209,7 +209,7 @@ export default function Booking() {
         type={toast.type}
       />
 
-      <main className="max-w-[1300px] mx-auto px-6 py-10">
+      <main className="max-w-[1440px] mx-auto px-4 md:px-10">
         {/* <Reveal>
           <BookingBreadcrumb />
         </Reveal> */}

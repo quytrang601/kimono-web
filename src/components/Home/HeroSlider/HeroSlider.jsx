@@ -13,7 +13,7 @@ const slides = [
     {
         id: 2,
         image: '/Slider_image_2.jpg',
-        title: 'Khoảnh Khắc Đẹp Tựạ Tranh',
+        title: 'Khoảnh Khắc Đẹp Tựa Tranh',
         subtitle: 'Lưu giữ những kỷ niệm tuyệt vời nhất tại xứ sở Hoa Đào'
     },
     {
@@ -35,7 +35,7 @@ const HeroSlider = () => {
             setCurrentSlide((prev) => (prev + 1) % slides.length);
             // Thay đổi key để animation chạy lại
             setAnimationKey(prev => prev + 1);
-        }, 6000); // Chuyển slide sau 6 giây
+        }, 4000); // Chuyển slide sau 6 giây
 
         return () => clearInterval(slideInterval);
     }, []);
