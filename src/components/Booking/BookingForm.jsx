@@ -1,6 +1,31 @@
 import React from "react";
 import { HiOutlineUser, HiOutlinePhone, HiOutlineEnvelope, HiOutlineCalendar, HiOutlineClock, HiOutlineInformationCircle } from "react-icons/hi2";
 
+const GuestCounter = ({ label, type, guests, onGuestChange }) => (
+  <div className="flex flex-col justify-center bg-white border border-[#7F170E]/5 rounded-2xl p-4 shadow-sm hover:border-[#7F170E]/20 transition-all duration-300">
+    <span className="text-[10px] uppercase tracking-wider text-gray-400 mb-3 font-semibold">{label}</span>
+    <div className="flex items-center justify-between">
+      <button
+        type="button"
+        onClick={() => onGuestChange(type, -1)}
+        className="w-8 h-8 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:bg-[#7F170E] hover:text-white hover:border-[#7F170E] transition-all duration-300 shadow-sm"
+      >
+        <span className="text-lg leading-none">-</span>
+      </button>
+      <span className="text-sm font-serif font-bold text-[#1a1111]">
+        {guests[type]}
+      </span>
+      <button
+        type="button"
+        onClick={() => onGuestChange(type, 1)}
+        className="w-8 h-8 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:bg-[#7F170E] hover:text-white hover:border-[#7F170E] transition-all duration-300 shadow-sm"
+      >
+        <span className="text-lg leading-none">+</span>
+      </button>
+    </div>
+  </div>
+);
+
 export default function BookingForm({
   formData,
   setFormData,
@@ -10,32 +35,6 @@ export default function BookingForm({
   onAddonToggle,
   onSubmit,
 }) {
-  // GuestCounter được tinh chỉnh để thanh thoát hơn
-  const GuestCounter = ({ label, type }) => (
-    <div className="flex flex-col justify-center bg-white border border-[#7F170E]/5 rounded-2xl p-4 shadow-sm hover:border-[#7F170E]/20 transition-all duration-300">
-      <span className="text-[10px] uppercase tracking-wider text-gray-400 mb-3 font-semibold">{label}</span>
-      <div className="flex items-center justify-between">
-        <button
-          type="button"
-          onClick={() => onGuestChange(type, -1)}
-          className="w-8 h-8 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:bg-[#7F170E] hover:text-white hover:border-[#7F170E] transition-all duration-300 shadow-sm"
-        >
-          <span className="text-lg leading-none">-</span>
-        </button>
-        <span className="text-sm font-serif font-bold text-[#1a1111]">
-          {guests[type]}
-        </span>
-        <button
-          type="button"
-          onClick={() => onGuestChange(type, 1)}
-          className="w-8 h-8 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:bg-[#7F170E] hover:text-white hover:border-[#7F170E] transition-all duration-300 shadow-sm"
-        >
-          <span className="text-lg leading-none">+</span>
-        </button>
-      </div>
-    </div>
-  );
-
   return (
     <div className="bg-white border border-[#7F170E]/10 rounded-[2.5rem] p-8 md:p-10 shadow-[0_20px_50px_rgba(127,23,14,0.05)] mt-6 relative overflow-hidden">
       {/* Trang trí góc subtle */}
@@ -161,10 +160,10 @@ export default function BookingForm({
               </h4>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <GuestCounter label="Nam (Người lớn)" type="men" />
-              <GuestCounter label="Nữ (Người lớn)" type="women" />
-              <GuestCounter label="Bé trai (Trẻ em)" type="boys" />
-              <GuestCounter label="Bé gái (Trẻ em)" type="girls" />
+              <GuestCounter label="Nam (Người lớn)" type="men" guests={guests} onGuestChange={onGuestChange} />
+              <GuestCounter label="Nữ (Người lớn)" type="women" guests={guests} onGuestChange={onGuestChange} />
+              <GuestCounter label="Bé trai (Trẻ em)" type="boys" guests={guests} onGuestChange={onGuestChange} />
+              <GuestCounter label="Bé gái (Trẻ em)" type="girls" guests={guests} onGuestChange={onGuestChange} />
             </div>
           </div>
 

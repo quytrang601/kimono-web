@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaInstagram, FaFacebookF, FaTiktok, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import './Footer.css';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -30,10 +31,10 @@ const Footer = () => {
                     <div className="footer-section lg:pl-10">
                         <h4 className="footer-title">Khám Phá</h4>
                         <ul className="footer-links">
-                            <li><a href="/">Trang Chủ</a></li>
-                            <li><a href="#packages">Gói Thuê</a></li>
-                            <li><a href="#prices">Bảng Giá</a></li>
-                            <li><a href="#booking">Đặt Lịch</a></li>
+                            <li><Link to="/">Trang Chủ</Link></li>
+                            <li><Link to="/san-pham">Gói Thuê</Link></li>
+                            <li><Link to="/bang-gia">Bảng Giá</Link></li>
+                            <li><Link to="/dat-lich">Đặt Lịch</Link></li>
                         </ul>
                     </div>
 
@@ -41,10 +42,10 @@ const Footer = () => {
                     <div className="footer-section">
                         <h4 className="footer-title">Thông Tin</h4>
                         <ul className="footer-links">
-                            <li><a href="#">Quy trình thuê</a></li>
-                            <li><a href="#">Mẫu tóc & Makeup</a></li>
-                            <li><a href="#">Câu hỏi thường gặp</a></li>
-                            <li><a href="#">Chính sách hủy</a></li>
+                            <li><Link to="/lien-he">Quy trình thuê</Link></li>
+                            <li><Link to="/mau-toc">Mẫu tóc & Makeup</Link></li>
+                            <li><Link to="/lien-he">Câu hỏi thường gặp</Link></li>
+                            <li><Link to="/lien-he">Chính sách hủy</Link></li>
                         </ul>
                     </div>
 
@@ -75,8 +76,8 @@ const Footer = () => {
                 <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] text-gray-600 uppercase tracking-[0.3em]">
                     <p>© 2026 Kyo Kimono Rental. All rights reserved.</p>
                     <div className="flex space-x-8 mt-4 md:mt-0 opacity-70">
-                        <a href="#" className="hover:text-[#F8D7D9] transition-colors">Privacy</a>
-                        <a href="#" className="hover:text-[#F8D7D9] transition-colors">Terms</a>
+                        <Link to="/lien-he" className="hover:text-[#F8D7D9] transition-colors">Privacy</Link>
+                        <Link to="/lien-he" className="hover:text-[#F8D7D9] transition-colors">Terms</Link>
                     </div>
                 </div>
             </div>

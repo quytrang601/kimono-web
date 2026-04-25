@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const Hairstyle = () => {
     useEffect(() => {
@@ -72,9 +73,9 @@ const Hairstyle = () => {
                 <p className="text-gray-400 text-[10px] uppercase tracking-[0.4em] mb-8">
                     * Các mẫu tóc trên đều đã bao gồm trong gói Premium
                 </p>
-                <button className="px-10 py-4 bg-[#7F170E] text-white text-[10px] uppercase tracking-[0.3em] hover:bg-[#2D1B1B] transition-all duration-300 rounded-full shadow-lg hover:shadow-xl active:scale-95">
+                <Link to="/dat-lich" className="px-10 py-4 bg-[#7F170E] text-white text-[10px] uppercase tracking-[0.3em] hover:bg-[#2D1B1B] transition-all duration-300 rounded-full shadow-lg hover:shadow-xl active:scale-95">
                     Đặt lịch tư vấn ngay
-                </button>
+                </Link>
             </section>
         </main>
     );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const About = () => {
     return (
@@ -53,12 +54,12 @@ const About = () => {
 
                         {/* BỘ ĐÔI NÚT ẤM */}
                         <div className="flex flex-col sm:flex-row gap-4 pt-10">
-                            <button className="bg-[#7F170E] text-white px-8 py-4 rounded-full font-bold tracking-widest hover:bg-[#5c110a] transition-all shadow-lg hover:shadow-[#7F170E]/30 uppercase text-[11px]">
+                            <Link to="/san-pham" className="bg-[#7F170E] text-white px-8 py-4 rounded-full font-bold tracking-widest hover:bg-[#5c110a] transition-all shadow-lg hover:shadow-[#7F170E]/30 uppercase text-[11px] text-center">
                                 Xem Sản Phẩm
-                            </button>
-                            <button className="border-2 border-[#7F170E] text-[#7F170E] px-8 py-4 rounded-full font-bold tracking-widest hover:bg-[#7F170E] hover:text-white transition-all uppercase text-[11px]">
+                            </Link>
+                            <Link to="/album" className="border-2 border-[#7F170E] text-[#7F170E] px-8 py-4 rounded-full font-bold tracking-widest hover:bg-[#7F170E] hover:text-white transition-all uppercase text-[11px] text-center">
                                 Xem Album Ảnh
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

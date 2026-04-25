@@ -1,5 +1,6 @@
 import React from "react";
 import "./CTA.css";
+import { Link } from "react-router-dom";
 
 const FinalCTA = () => {
   return (
@@ -41,9 +42,9 @@ const FinalCTA = () => {
 
         {/* Cụm nút bấm tập trung (Focus Action) */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-          <button className="w-full sm:w-auto bg-[#7F170E] text-white px-12 py-5 rounded-full font-bold tracking-[0.2em] hover:bg-white hover:text-[#7F170E] transition-all duration-500 shadow-2xl uppercase text-xs">
+          <Link to="/dat-lich" className="w-full sm:w-auto bg-[#7F170E] text-white px-12 py-5 rounded-full font-bold tracking-[0.2em] hover:bg-white hover:text-[#7F170E] transition-all duration-500 shadow-2xl uppercase text-xs text-center">
             Đặt lịch ngay bây giờ
-          </button>
+          </Link>
 
           <button className="group flex items-center text-white font-bold text-xs uppercase tracking-[0.2em]">
             <span className="border-b border-white/30 pb-1 group-hover:border-white transition-all">

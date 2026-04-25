@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { Link } from 'react-router-dom';
 import './HeroSlider.css';
 
 
@@ -80,14 +80,14 @@ const HeroSlider = () => {
                     <div className=" flex flex-col sm:flex-row items-center justify-center gap-6">
 
                         {/* 1. Nút Đặt Lịch Ngay (Nút chính - Màu đỏ đô) */}
-                        <button className="w-full sm:w-auto bg-[#7F170E] text-white px-10 py-4 text-xs font-semibold uppercase tracking-[0.3em] transition-all duration-300 hover:bg-[#9c1d11] shadow-lg shadow-[#7F170E]/20">
+                        <Link to="/dat-lich" className="w-full sm:w-auto bg-[#7F170E] text-white px-10 py-4 text-xs font-semibold uppercase tracking-[0.3em] transition-all duration-300 hover:bg-[#9c1d11] shadow-lg shadow-[#7F170E]/20 text-center">
                             Đặt Lịch Ngay
-                        </button>
+                        </Link>
 
                         {/* 2. Nút Sản phẩm (Nút phụ - Viền đỏ, nền trong) */}
-                        <button className="w-full sm:w-auto btn-fill-effect border border-[#7F170E] text-[#7F170E] px-10 py-4 text-xs font-semibold uppercase tracking-[0.3em] bg-white transition-all duration-300 hover:text-white">
+                        <Link to="/san-pham" className="w-full sm:w-auto btn-fill-effect border border-[#7F170E] text-[#7F170E] px-10 py-4 text-xs font-semibold uppercase tracking-[0.3em] bg-white transition-all duration-300 hover:text-white text-center">
                             Sản phẩm
-                        </button>
+                        </Link>
 
                     </div>
                 </div>

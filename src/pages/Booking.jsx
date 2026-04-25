@@ -32,6 +32,15 @@ export default function Booking() {
   });
   const toastTimeout = useRef(null);
 
+  // --- HANDLERS ---
+  const showToast = (message, type = "success") => {
+    if (toastTimeout.current) clearTimeout(toastTimeout.current);
+    setToast({ visible: true, message, type });
+    toastTimeout.current = setTimeout(() => {
+      setToast((prev) => ({ ...prev, visible: false }));
+    }, 1500); // 1.5 seconds so users can read it comfortably
+  };
+
   // --- PRE-FILL CART FROM PRODUCT DETAIL PAGE ---
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to top when page loads
@@ -53,15 +62,6 @@ export default function Booking() {
       window.history.replaceState({}, document.title);
     }
   }, [location.state]);
-
-  // --- HANDLERS ---
-  const showToast = (message, type = "success") => {
-    if (toastTimeout.current) clearTimeout(toastTimeout.current);
-    setToast({ visible: true, message, type });
-    toastTimeout.current = setTimeout(() => {
-      setToast((prev) => ({ ...prev, visible: false }));
-    }, 1500); // 1.5 seconds so users can read it comfortably
-  };
 
   const handleAddToCart = (item) => {
     const existing = cart.find((c) => c.id === item.id);
