@@ -67,8 +67,9 @@ const About = () => {
                 {/* THANH ĐỊA CHỈ CHI TIẾT (Address Bar) */}
                 <div className="mt-24 bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="flex items-center space-x-5">
-                        <div className="w-12 h-12 bg-[#7F170E]/10 rounded-full flex items-center justify-center text-[#7F170E] text-xl">
-                            📍
+                        <div className="w-12 h-12 bg-[#7F170E]/10 rounded-full flex items-center justify-center text-[#7F170E]">
+                            {/* Dùng thẻ img và trỏ tới file trong public */}
+                            <img src="/pin.svg" alt="Location" className="w-6 h-6" />
                         </div>
                         <div>
                             <h5 className="font-bold text-gray-800 uppercase tracking-widest text-xs mb-1">Vị trí thuận tiện tại Gion, Kyoto</h5>
