@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const Hairstyle = () => {
     useEffect(() => {
@@ -68,17 +69,16 @@ const Hairstyle = () => {
                     ))}
                 </div>
 
-                {/* CTA & Footer - Xuất hiện cuối cùng (delay-500) */}
-                <section className="mt-24 text-center border-t border-gray-200/60 pt-16 opacity-0 animate-fade-in-up delay-500">
-                    <p className="text-gray-400 text-[10px] uppercase tracking-[0.4em] mb-8">
-                        * Các mẫu tóc trên đều đã bao gồm trong gói Premium
-                    </p>
-                    <button className="px-10 py-4 bg-[#7F170E] text-white text-[10px] uppercase tracking-[0.3em] hover:bg-[#2D1B1B] transition-all duration-300 rounded-full shadow-lg hover:shadow-xl active:scale-95">
-                        Đặt lịch tư vấn ngay
-                    </button>
-                </section>
-            </main>
-        </div>
+            {/* CTA & Footer - Xuất hiện cuối cùng (delay-500) */}
+            <section className="mt-24 text-center border-t border-gray-200/60 pt-16 opacity-0 animate-fade-in-up delay-500">
+                <p className="text-gray-400 text-[10px] uppercase tracking-[0.4em] mb-8">
+                    * Các mẫu tóc trên đều đã bao gồm trong gói Premium
+                </p>
+                <Link to="/dat-lich" className="px-10 py-4 bg-[#7F170E] text-white text-[10px] uppercase tracking-[0.3em] hover:bg-[#2D1B1B] transition-all duration-300 rounded-full shadow-lg hover:shadow-xl active:scale-95">
+                    Đặt lịch tư vấn ngay
+                </Link>
+            </section>
+        </main>
     );
 };
 

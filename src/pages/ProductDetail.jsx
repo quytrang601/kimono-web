@@ -15,20 +15,24 @@ export default function ProductDetail() {
     let foundCatName = "";
 
     // Flatten and search
-    if (packages.women.find((p) => p.id === parseInt(id))) {
-      foundProduct = packages.women.find((p) => p.id === parseInt(id));
+    const womenProduct = packages.women.find((p) => p.id === parseInt(id));
+    const menProduct = packages.men.find((p) => p.id === parseInt(id));
+    const kidsProduct = packages.kids.find((p) => p.id === parseInt(id));
+
+    if (womenProduct) {
+      foundProduct = womenProduct;
       foundCatName = "Kimono nữ";
       setRelatedProducts(
         packages.women.filter((p) => p.id !== parseInt(id)).slice(0, 4),
       );
-    } else if (packages.men.find((p) => p.id === parseInt(id))) {
-      foundProduct = packages.men.find((p) => p.id === parseInt(id));
+    } else if (menProduct) {
+      foundProduct = menProduct;
       foundCatName = "Kimono nam";
       setRelatedProducts(
         packages.men.filter((p) => p.id !== parseInt(id)).slice(0, 4),
       );
-    } else if (packages.kids.find((p) => p.id === parseInt(id))) {
-      foundProduct = packages.kids.find((p) => p.id === parseInt(id));
+    } else if (kidsProduct) {
+      foundProduct = kidsProduct;
       foundCatName = "Kimono trẻ em";
       setRelatedProducts(
         packages.kids.filter((p) => p.id !== parseInt(id)).slice(0, 4),
